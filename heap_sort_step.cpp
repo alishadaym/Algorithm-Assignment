@@ -156,7 +156,7 @@ void heapSort(vector<Record>& arr,
     {
         swap(arr[0], arr[i]);
 
-        cout << "After swapping root with index " << i << endl;
+        outFile << "After swapping root with index " << i << endl;
         printRange(arr, startRow, endRow, outFile);
 
         heapify(arr, i, 0, outFile, startRow, endRow);
