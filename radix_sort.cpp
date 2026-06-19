@@ -18,10 +18,10 @@
 
 #include <iostream>
 #include <fstream>
-#include <sstream> // split csv line 
+#include <sstream> // split csv line
 #include <vector>
 #include <string>
-#include <chrono> // measure the running time 
+#include <chrono> // measure the running time
 using namespace std;
 
 struct Record
@@ -30,17 +30,17 @@ struct Record
     string word;
 };
 
-// get largest number 
+// get largest number
 long long getMax(vector<Record>& data)
 {
-    long long maxNum = data[0].number; // assume first number is biggest 
+    long long maxNum = data[0].number; // assume first number is biggest
 
     // check every record starting from second item
-    for(int i=1; i < data.size(); i++)
+    for (int i = 1; i < data.size(); i++)
     {
-        // if current number is bigger 
+        // if current number is bigger
         if (data[i].number > maxNum)
-        {   
+        {
             // update biggest number
             maxNum = data[i].number;
         }
@@ -51,39 +51,39 @@ long long getMax(vector<Record>& data)
 // counting sort for each digit
 void countingSort(vector<Record>& data, long long digit)
 {
-    // get number of records 
+    // get number of records
     int size = data.size();
 
-    // temporary array to store sorted result 
+    // temporary array to store sorted result
     vector<Record> output(size);
 
     // stores frequency of digits 0-9
     int count[10] = {0};
 
-    // count how many times each digit appears 
-    for (int i=0; i < size; i++)
+    // count how many times each digit appears
+    for (int i = 0; i < size; i++)
     {
         int value = (data[i].number / digit) % 10;
         count[value]++;
     }
 
     // convert count into actual positions
-    for (int i=1; i < 10; i++)
+    for (int i = 1; i < 10; i++)
     {
-        count[i] = count[i] + count[i-1];
+        count[i] = count[i] + count[i - 1];
     }
 
-    // loop backwards to keep stable sorting 
-    for (int i=size-1; i >= 0; i--)
+    // loop backwards to keep stable sorting
+    for (int i = size - 1; i >= 0; i--)
     {
         int value = (data[i].number / digit) % 10;
 
-        // put record into output array 
-        output[count[value]-1] = data[i];
+        // put record into output array
+        output[count[value] - 1] = data[i];
         count[value]--;
     }
 
-    // copy sorted result back to original vector 
+    // copy sorted result back to original vector
     data = output;
 }
 
@@ -91,23 +91,23 @@ void radixSort(vector<Record>& data)
 {
     long long maxNum = getMax(data);
 
-    // repeat sorting from rightmost digit to leftmost digit 
-    for(long long digit = 1; maxNum / digit>0; digit *=10)
+    // repeat sorting from rightmost digit to leftmost digit
+    for (long long digit = 1; maxNum / digit > 0; digit *= 10) // keep looping until maxNum / digit becomes 0
     {
-        // sort current digit 
+        // sort current digit
         countingSort(data, digit);
     }
 }
 
 int main()
 {
-    // store input filename 
+    // store input filename
     string filename;
 
-    cout << "Enter dataset filename: " << endl; 
+    cout << "Enter dataset filename: " << endl;
     cin >> filename;
 
-    ifstream input(filename); // open file 
+    ifstream input(filename); // open file
 
     if (!input)
     {
@@ -115,12 +115,12 @@ int main()
         return 0;
     }
 
-    // storing all CSV records 
+    // storing all CSV records
     vector<Record> data;
     string line;
 
-    // read CSV line by line 
-    while(getline(input, line))
+    // read CSV line by line
+    while (getline(input, line))
     {
         // put line into stringstream
         stringstream ss(line);
@@ -129,7 +129,7 @@ int main()
         string word;
 
         getline(ss, num, ','); // read value before comma
-        getline(ss, word); // read value after comma 
+        getline(ss, word);     // read value after comma
 
         // convert number string to long long, then store number + word
         data.push_back({stoll(num), word});
@@ -137,12 +137,12 @@ int main()
 
     input.close();
 
-    // start measuring sorting time 
+    // start measuring sorting time
     auto start = chrono::high_resolution_clock::now();
-    //run radix sort 
+    // run radix sort
     radixSort(data);
 
-    // stop measuring time 
+    // stop measuring time
     auto end = chrono::high_resolution_clock::now();
 
     // calculate total runtime
@@ -151,18 +151,19 @@ int main()
     string outputName = "radix_sorted_" + filename;
     ofstream output(outputName);
 
-    // write sorted records into file 
-    for(Record r : data)
+    // write sorted records into file
+    for (Record r : data)
     {
         output << r.number << "," << r.word << endl;
     }
 
-    // write running time in file 
-    output << endl << "Running time: " << time.count() << "seconds.";
+    // write running time in file
+    output << endl
+           << "Running time: " << time.count() << "seconds.";
 
     output.close();
 
-    //display completion message 
+    // display completion message
     cout << "Radix sort completed" << endl;
     cout << "Running time: " << time.count() << "seconds." << endl;
     cout << "Output file:" << outputName << endl;
