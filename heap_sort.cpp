@@ -21,6 +21,7 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <chrono>
 
 using namespace std;
 
@@ -67,7 +68,7 @@ vector<Record> readCSV(string filename)
 }
 
 //write csv file to save result after sorting
-void writeCSV(string filename, vector<Record> data)
+void writeCSV(string filename, vector<Record>& data, long long runtime)
 {
     ofstream file(filename);
 
@@ -79,13 +80,13 @@ void writeCSV(string filename, vector<Record> data)
 
     for (int i = 0; i < data.size(); i++)
     {
-        file << data[i].number << "," << data[i].word;
-
-        if (i != data.size() - 1)
-        {
-            file << endl;
-        }
+        file << data[i].number << "," << data[i].word << endl;
     }
+
+    file << endl;
+    file << "Running Time (microseconds): " << runtime << endl;
+
+    file.close();
 }
 
 //heapify function
@@ -146,7 +147,7 @@ int main()
 
     vector<Record> data = readCSV(inputFile);
 
-    if (data.size() == 0)
+    if (data.empty())
     {
         cout << "Dataset is empty or cannot be read." << endl;
         return 0;
@@ -154,14 +155,22 @@ int main()
 
     cout << "Total records loaded: " << data.size() << endl;
 
+    auto start = chrono::high_resolution_clock::now();
+
     heapSort(data);
 
-    string outputFile = "heap_sorted_" + inputFile;
+    auto end = chrono::high_resolution_clock::now();
 
-    writeCSV(outputFile, data);
+    long long runtime = chrono::duration_cast<chrono::microseconds>(end-start).count();
 
+    string outputFile = "heap_sort_dataset_" + to_string(data.size()) + ".csv";
+
+    writeCSV(outputFile, data, runtime);
+
+    cout << endl;
     cout << "Heap sort completed." << endl;
-    cout << "Output fileL " << outputFile << endl;
+    cout << "Output file: " << outputFile << endl;
+    cout << "Running Time: " << runtime << " microseconds" << endl;
 
     return 0;
 }

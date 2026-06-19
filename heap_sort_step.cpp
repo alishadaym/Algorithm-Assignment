@@ -30,14 +30,25 @@ struct Record
     string word;
 };
 
-//print array
-void printArray(vector<Record>& arr)
+//print selected rows to file
+void printRange(vector<Record>& arr,
+                int startRow,
+                int endRow,
+                ofstream& outFile)
 {
-    for (int i = 0; i < arr.size(); i++)
+    for (int i = startRow - 1;
+        i <= endRow - 1 && i < arr.size();
+        i++)
     {
-        cout << arr[i].number << " ";
+        outFile << i + 1
+                << ": "
+                << arr[i].number
+                << ","
+                << arr[i].word
+                << endl;
     }
-    cout << endl;
+
+    outFile << endl;
 }
 
 //read csv file
@@ -58,7 +69,9 @@ vector<Record> readCSV(string filename)
     {
         stringstream ss(line);
 
-        string num, word;
+        string num;
+        string word;
+
         getline(ss, num, ',');
         getline(ss, word);
 
@@ -74,7 +87,12 @@ vector<Record> readCSV(string filename)
 }
 
 //heapify with steps
-void heapify(vector<Record>& arr, int n, int i)
+void heapify(vector<Record>& arr,
+            int n,
+            int i,
+            ofstream& outFile,
+            int startRow,
+            int endRow)
 {
     int largest = i;
     int left = 2 * i + 1;
@@ -94,46 +112,54 @@ void heapify(vector<Record>& arr, int n, int i)
     {
         swap(arr[i], arr[largest]);
 
-        cout << "Heapify swap: ";
-        printArray(arr);
+        outFile << "Heapify Swap" << endl;
+        printRange(arr, startRow, endRow, outFile);
 
-        heapify(arr, n, largest);
+        heapify(arr, n, largest, outFile, startRow, endRow);
     }
 }
 
-//bulding heap with steps
-void buildHeap(vector<Record>& arr)
+//bulding max heap
+void buildHeap(vector<Record>& arr,
+                ofstream& outFile,
+                int startRow,
+                int endRow)
 {
     int n = arr.size();
 
-    cout << "Building max heap.." << endl;
+    outFile << "Building Max Heap" << endl;
+    outFile << endl;
 
     for (int i = n / 2 - 1; i >= 0; i--)
     {
-        heapify(arr, n, i);
+        heapify(arr, n, i, outFile, startRow, endRow);
     }
 
-    cout << "After buildHeap: ";
-    printArray(arr);
+    outFile << "After build Heap" << endl;
+    printRange(arr, startRow, endRow, outFile);
 }
 
 //heap sort with steps
-void heapSort(vector<Record>& arr)
+void heapSort(vector<Record>& arr,
+                ofstream& outFile,
+                int startRow,
+                int endRow)
 {
     int n = arr.size();
 
-    buildHeap(arr);
+    buildHeap(arr, outFile, startRow, endRow);
 
-    cout << "\nStarting Heap Sort...\n" << endl;
+    outFile << "Starting Heap Sort" << endl;
+    outFile << endl;
 
     for (int i = n - 1; i > 0; i--)
     {
         swap(arr[0], arr[i]);
 
-        cout << "After swapping root with index " << i << ": ";
-        printArray(arr);
+        cout << "After swapping root with index " << i << endl;
+        printRange(arr, startRow, endRow, outFile);
 
-        heapify(arr, i, 0);
+        heapify(arr, i, 0, outFile, startRow, endRow);
     }
 }
 
@@ -152,13 +178,38 @@ int main()
         return 0;
     }
 
-    cout << "\nOriginal data: ";
-    printArray(data);
+    int startRow;
+    int endRow;
 
-    heapSort(data);
+    cout << "Enter start row: ";
+    cin >> startRow;
 
-    cout << "\nFinal Sorted Data: ";
-    printArray(data);
+    cout << "Enter end row: ";
+    cin >> endRow;
+
+    if (startRow < 1 || endRow > data.size() || startRow > endRow)
+    {
+        cout << "Invalid row range." << endl;
+        return 0;
+    }
+
+    string outputFile = "dataset_" + to_string(data.size()) + "_heap_sorted_step_" +
+        to_string(startRow) + "_" + to_string(endRow) + ".txt";
+
+    ofstream outFile(outputFile);
+
+    if (!outFile)
+    {
+        cout << "Cannot create output file." << endl;
+        return 0;
+    }
+
+    heapSort(data, outFile, startRow, endRow);
+
+    outFile.close();
+
+    cout << endl;
+    cout << "Heap sort steps saved to: " << outputFile << endl;
     
     return 0;
 }
