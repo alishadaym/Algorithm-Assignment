@@ -76,9 +76,9 @@ void printRange(vector<Record>& arr, int startRow,
     {
         outFile << arr[i].number << "/" << arr[i].word;
 
-        if (i < endRow - 1 && i << arr.size() - 1)
+        if (i < endRow - 1 && i < arr.size() - 1)
         {
-            outFile << ",";
+            outFile << ", ";
         }
     }
 
@@ -133,7 +133,7 @@ void heapSort(vector<Record>& arr,
     //initial heap
     printRange(arr, startRow, endRow, outFile, "initial");
 
-    for (int i = n - 1; i > 0; i--)
+    for (int i = n - 1; i > n - 6; i--) //can change to i > n - 6 -> to print first 5 iterations
     {
         swap(arr[0], arr[i]);
 
