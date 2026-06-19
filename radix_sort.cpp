@@ -74,12 +74,12 @@ void countingSort(vector<Record>& data, long long digit)
     }
 
     // loop backwards to keep stable sorting 
-    for (int i=size; i >= 0; i--)
+    for (int i=size-1; i >= 0; i--)
     {
         int value = (data[i].number / digit) % 10;
 
         // put record into output array 
-        output[count[digit]-1] = data[i];
+        output[count[value]-1] = data[i];
         count[value]--;
     }
 
