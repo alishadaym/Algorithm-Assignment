@@ -1,3 +1,21 @@
+// *********************************************************
+// Program: dataset_generator.cpp
+// Course: CCP6214 Algorithm Design and Analysis
+// Lecture Class: TC6L
+// Tutorial Class: T21L
+// Trimester: 2610
+// Member_1: 242UC244S4 | NUR ALISHA DAMIA BINTI SHAMSUL ANUAR | nur.alisha.damia@student.mmu.edu.my | 0166647156
+// Member_2: 242UC244DM | FARAH ALYSSA BINTI SHARANI | farah.alyssa.sharani@student.mmu.edu.my | 0192648995
+// Member_3: 242UC244RK | ADEENA SHAHIRA BINTI MOHD HAFIZ | adeena.shahira.mohd@student.mmu.edu.my | 0193233705
+// Member_4: 243UC247BP | ILIE ISABELLA BINTI FAIROZ IZNI | ilie.isabella.fairoz@student.mmu.edu.my | 0186656781
+// *********************************************************
+// Task Distribution
+// Member_1: Dataset Generator & Heap Sort
+// Member_2: Hash Table Search
+// Member_3: Radix Sort
+// Member_4: Documentation
+// *********************************************************
+
 #include <iostream>
 #include <fstream>
 #include <unordered_set>
