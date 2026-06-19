@@ -30,27 +30,6 @@ struct Record
     string word;
 };
 
-//print selected rows to file
-void printRange(vector<Record>& arr,
-                int startRow,
-                int endRow,
-                ofstream& outFile)
-{
-    for (int i = startRow - 1;
-        i <= endRow - 1 && i < arr.size();
-        i++)
-    {
-        outFile << i + 1
-                << ": "
-                << arr[i].number
-                << ","
-                << arr[i].word
-                << endl;
-    }
-
-    outFile << endl;
-}
-
 //read csv file
 vector<Record> readCSV(string filename)
 {
@@ -86,13 +65,28 @@ vector<Record> readCSV(string filename)
     return data;
 }
 
+//to print selected range in sample format
+void printRange(vector<Record>& arr, int startRow,
+                int endRow, ofstream& outFile, string label)
+{
+    outFile << "[";
+
+    for (int i = startRow - 1; i <= endRow - 1 && i < arr.size();
+        i++)
+    {
+        outFile << arr[i].number << "/" << arr[i].word;
+
+        if (i < endRow - 1 && i << arr.size() - 1)
+        {
+            outFile << ",";
+        }
+    }
+
+    outFile << "] " << label << endl;
+}
+
 //heapify with steps
-void heapify(vector<Record>& arr,
-            int n,
-            int i,
-            ofstream& outFile,
-            int startRow,
-            int endRow)
+void heapify(vector<Record>& arr, int n, int i)
 {
     int largest = i;
     int left = 2 * i + 1;
@@ -111,32 +105,19 @@ void heapify(vector<Record>& arr,
     if (largest != i)
     {
         swap(arr[i], arr[largest]);
-
-        outFile << "Heapify Swap" << endl;
-        printRange(arr, startRow, endRow, outFile);
-
-        heapify(arr, n, largest, outFile, startRow, endRow);
+        heapify(arr, n, largest);
     }
 }
 
 //bulding max heap
-void buildHeap(vector<Record>& arr,
-                ofstream& outFile,
-                int startRow,
-                int endRow)
+void buildHeap(vector<Record>& arr)
 {
     int n = arr.size();
 
-    outFile << "Building Max Heap" << endl;
-    outFile << endl;
-
     for (int i = n / 2 - 1; i >= 0; i--)
     {
-        heapify(arr, n, i, outFile, startRow, endRow);
+        heapify(arr, n, i);
     }
-
-    outFile << "After build Heap" << endl;
-    printRange(arr, startRow, endRow, outFile);
 }
 
 //heap sort with steps
@@ -147,19 +128,18 @@ void heapSort(vector<Record>& arr,
 {
     int n = arr.size();
 
-    buildHeap(arr, outFile, startRow, endRow);
+    buildHeap(arr);
 
-    outFile << "Starting Heap Sort" << endl;
-    outFile << endl;
+    //initial heap
+    printRange(arr, startRow, endRow, outFile, "initial");
 
     for (int i = n - 1; i > 0; i--)
     {
         swap(arr[0], arr[i]);
 
-        outFile << "After swapping root with index " << i << endl;
-        printRange(arr, startRow, endRow, outFile);
+        heapify(arr, i, 0);
 
-        heapify(arr, i, 0, outFile, startRow, endRow);
+        printRange(arr, startRow, endRow, outFile, "i = " + to_string(i));
     }
 }
 
