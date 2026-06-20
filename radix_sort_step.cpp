@@ -32,22 +32,23 @@ struct Record
 // print current radix sort step into txt file 
 void printStep(ofstream& output, vector<Record>& data, string label)
 {
-    output << "[";
+    output << label << endl;
 
     // print every record 
     for(int i=0; i < data.size(); i++)
     {
-        output << data[i].number << "/" << data[i].word << endl;
+        output << data[i].number << "/" << data[i].word;
 
         // add comma except last data 
         if(i != data.size()-1)
         {
             output << ", ";
         }
+
+        output << endl;
     }
 
-    // print original 
-    output << "]" << label << endl;
+    output << endl;
 }
 
 // sort according to current digit
@@ -158,7 +159,7 @@ int main()
     // create txt output 
     ofstream output(outputName);
 
-    int d = 10;
+    int d = 10; // dataset numbers are fixed as 10-digit integers, d is position
 
     // process all 10 digits 
     for(long long digit = 1; digit <= 1000000000; digit *= 10)
@@ -166,14 +167,14 @@ int main()
         // sort current digit 
         countingSort(data, digit);
 
-        printStep(output, data, "d =" + to_string(d));
+        printStep(output, data, "d = " + to_string(d));
 
         d--;
     }
 
     output.close();
 
-    cout << "Created output file: " << outputName << endl;
+    cout << "Created output file: " << outputName;
 
     return 0;
 }
