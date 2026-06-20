@@ -22,6 +22,7 @@
 #include <vector>
 #include <string>
 #include <chrono> // measure the running time
+#include <iomanip>
 using namespace std;
 
 struct Record
@@ -148,7 +149,7 @@ int main()
     // calculate total runtime
     chrono::duration<double> time = end - start;
 
-    string outputName = "radix_sorted_" + filename;
+    string outputName = filename + "_radix_sorted_" + filename;
     ofstream output(outputName);
 
     // write sorted records into file
@@ -165,7 +166,7 @@ int main()
 
     // display completion message
     cout << "Radix sort completed" << endl;
-    cout << "Running time: " << time.count() << "seconds." << endl;
+    cout << fixed << setprecision(6) << "Running time: " << time.count() << "seconds." << endl;
     cout << "Output file:" << outputName << endl;
 
     return 0;
