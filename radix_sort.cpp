@@ -149,7 +149,8 @@ int main()
     // calculate total runtime
     chrono::duration<double> time = end - start;
 
-    string outputName = filename + "_radix_sorted_" + filename;
+    string datasetName =  filename.substr(0, filename.size()-4);
+    string outputName = datasetName + "_radix_sorted_" + filename;
     ofstream output(outputName);
 
     // write sorted records into file
