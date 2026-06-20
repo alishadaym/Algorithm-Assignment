@@ -1,9 +1,28 @@
+// *********************************************************
+// Program: hash_table_search.cpp
+// Course: CCP6214 Algorithm Design and Analysis
+// Lecture Class: TC6L
+// Tutorial Class: T21L
+// Trimester: 2610
+// Member_1: 242UC244RK | ADEENA SHAHIRA BINTI MOHD HAFIZ | adeena.shahira.mohd@student.mmu.edu.my | 0193233705
+// Member_2: 242UC244DM | FARAH ALYSSA BINTI SHARANI | farah.alyssa.sharani@student.mmu.edu.my | 0192648995
+// Member_3: ID | ILIE ISABELLA BINTI FAIROZ IZNI | ilie.isabella.fairoz@student.mmu.edu.my | 0186656781
+// Member_4: 242UC244S4 | NUR ALISHA DAMIA BINTI SHAMSUL ANUAR (leader) | nur.alisha.damia@student.mmu.edu.my | 0166647156
+// *********************************************************
+// Task Distribution
+// Member_1:
+// Member_2: Hash table search & Hash table search step
+// Member_3:
+// Member_4:
+// *********************************************************
+
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <vector>
 #include <sstream>
 #include <chrono>
+#include <iomanip>
 
 using namespace std;
 
@@ -126,22 +145,32 @@ int main()
     vector<long long> averageTargets;
     vector<long long> worstTargets;
 
-    //Best case: repeatedly search first few existing keys
+    //Best case: repeatedly search first existing keys (key should be found immediately)
     for (int i = 0; i < n; i++)
     {
         bestTargets.push_back(data[0].first);
     }
 
-    //Average case: seaarch all existing keys
+    //Average case: search all existing keys once (keys should be found after some probing)
     for (int i = 0; i < n; i++)
     {
         averageTargets.push_back(data[i].first);
     }
 
-    //Worst case: search keys that doesn't exist
+    //Worst case: search non-existing keys that hash to the same index as the first record 
+    //(forcing collision probing)
+    int worstIndex = data[0].first % tableSize;
+    long long worstKey = data[0].first + tableSize;
+
     for (int i = 0; i < n; i++)
     {
-        worstTargets.push_back(9999999999LL - i);
+        while (worstKey % tableSize != worstIndex)
+        {
+            worstKey++;
+        }
+
+        worstTargets.push_back(worstKey);
+        worstKey += tableSize;
     }
 
     double bestTime = measureSearchTime(hashTable, bestTargets);
@@ -151,15 +180,21 @@ int main()
     string outputFile = "hash_table_search_dataset_" + to_string(n) + ".txt";
     ofstream out(outputFile);
 
+    out << fixed << setprecision(9);
+
     out << "Dataset size: " << n << endl;
+    out << "Hash table size: " << tableSize << endl;
     out << "Best case time: " << bestTime << " seconds" << endl;
     out << "Average case time: " << averageTime << " seconds" << endl;
     out << "Worst case time: " << worstTime << " seconds" << endl;
 
     out.close();
 
+    cout << fixed << setprecision(9);
+
     cout << "\nHash Table Search Runtime Result" << endl;
     cout << "Dataset size: " << n << endl;
+    cout << "Hash table size: " << tableSize << endl;
     cout << "Best case time: " << bestTime << " seconds" << endl;
     cout << "Average case time: " << averageTime << " seconds" << endl;
     cout << "Worst case time: " << worstTime << " seconds" << endl;

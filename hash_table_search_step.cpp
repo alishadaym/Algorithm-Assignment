@@ -11,7 +11,7 @@
 // *********************************************************
 // Task Distribution
 // Member_1:
-// Member_2: Hash table search
+// Member_2: Hash table search & Hash table search step
 // Member_3:
 // Member_4:
 // *********************************************************
