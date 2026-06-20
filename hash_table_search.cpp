@@ -1,0 +1,204 @@
+// *********************************************************
+// Program: hash_table_search.cpp
+// Course: CCP6214 Algorithm Design and Analysis
+// Lecture Class: TC6L
+// Tutorial Class: T21L
+// Trimester: 2610
+// Member_1: 242UC244RK | ADEENA SHAHIRA BINTI MOHD HAFIZ | adeena.shahira.mohd@student.mmu.edu.my | 0193233705
+// Member_2: 242UC244DM | FARAH ALYSSA BINTI SHARANI | farah.alyssa.sharani@student.mmu.edu.my | 0192648995
+// Member_3: ID | ILIE ISABELLA BINTI FAIROZ IZNI | ilie.isabella.fairoz@student.mmu.edu.my | 0186656781
+// Member_4: 242UC244S4 | NUR ALISHA DAMIA BINTI SHAMSUL ANUAR (leader) | nur.alisha.damia@student.mmu.edu.my | 0166647156
+// *********************************************************
+// Task Distribution
+// Member_1:
+// Member_2: Hash table search & Hash table search step
+// Member_3:
+// Member_4:
+// *********************************************************
+
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+#include <sstream>
+#include <chrono>
+#include <iomanip>
+
+using namespace std;
+
+struct Record
+{
+    long long key;
+    string value;
+    bool occupied;
+
+    Record()
+    {
+        key = -1;
+        value = "";
+        occupied = false;
+    }
+};
+
+int hashFunction (long long key, int tableSize)
+{
+    return key % tableSize;
+}
+
+void insertRecord (vector<Record>& table, long long key, string value)
+{
+    int tableSize = table.size();
+    int index = hashFunction(key, tableSize);
+
+    while (table[index].occupied)
+    {
+        index = (index + 1) % tableSize;
+    }
+
+    table[index].key = key;
+    table[index].value = value;
+    table[index].occupied = true;
+}
+
+bool searchRecord (vector<Record>& table, long long target)
+{
+    int tableSize = table.size();
+    int index = hashFunction(target, tableSize);
+    int startIndex = index;
+
+    while (table[index].occupied)
+    {
+        if (table[index].key == target)
+        {
+            return true;
+        }
+
+        index = (index + 1) % tableSize;
+
+        if (index == startIndex)
+        {
+            break; //already looped through the entire table
+        }
+    }
+
+    return false;
+}
+
+double measureSearchTime (vector<Record>& table, vector<long long>& targets)
+{
+    auto start = chrono::high_resolution_clock::now();
+
+    for (long long target : targets)
+    {
+        searchRecord(table, target);
+    }
+
+    auto end = chrono::high_resolution_clock::now();
+
+    chrono::duration<double> elapsed = end - start;
+    return elapsed.count();
+}
+
+int main()
+{
+    string datasetFile;
+
+    cout << "Enter dataset filename: ";
+    cin >> datasetFile;
+
+    ifstream file(datasetFile);
+
+    if(!file)
+    {
+        cout << "\nError: Dataset file cannot be opened or found." << endl;
+        return 1;
+    }
+
+    vector<pair<long long, string>> data;
+    string line;
+
+    while (getline(file, line))
+    {
+        stringstream ss(line);
+        string keyText, value;
+
+        getline(ss, keyText, ',');
+        getline(ss, value);
+
+        long long key = stoll(keyText);
+        data.push_back({key, value});
+    }
+
+    file.close();
+
+    int n = data.size();
+    int tableSize = n * 2 + 1; //using prime number greater than 2n for better distribution
+
+    vector<Record> hashTable(tableSize);
+
+    for (auto item : data)
+    {
+        insertRecord(hashTable, item.first, item.second);
+    }
+
+    vector<long long> bestTargets;
+    vector<long long> averageTargets;
+    vector<long long> worstTargets;
+
+    //Best case: repeatedly search first existing keys (key should be found immediately)
+    for (int i = 0; i < n; i++)
+    {
+        bestTargets.push_back(data[0].first);
+    }
+
+    //Average case: search all existing keys once (keys should be found after some probing)
+    for (int i = 0; i < n; i++)
+    {
+        averageTargets.push_back(data[i].first);
+    }
+
+    //Worst case: search non-existing keys that hash to the same index as the first record 
+    //(forcing collision probing)
+    int worstIndex = data[0].first % tableSize;
+    long long worstKey = data[0].first + tableSize;
+
+    for (int i = 0; i < n; i++)
+    {
+        while (worstKey % tableSize != worstIndex)
+        {
+            worstKey++;
+        }
+
+        worstTargets.push_back(worstKey);
+        worstKey += tableSize;
+    }
+
+    double bestTime = measureSearchTime(hashTable, bestTargets);
+    double averageTime = measureSearchTime(hashTable, averageTargets);
+    double worstTime = measureSearchTime(hashTable, worstTargets);
+
+    string outputFile = "hash_table_search_dataset_" + to_string(n) + ".txt";
+    ofstream out(outputFile);
+
+    out << fixed << setprecision(9);
+
+    out << "Dataset size: " << n << endl;
+    out << "Hash table size: " << tableSize << endl;
+    out << "Best case time: " << bestTime << " seconds" << endl;
+    out << "Average case time: " << averageTime << " seconds" << endl;
+    out << "Worst case time: " << worstTime << " seconds" << endl;
+
+    out.close();
+
+    cout << fixed << setprecision(9);
+
+    cout << "\nHash Table Search Runtime Result" << endl;
+    cout << "Dataset size: " << n << endl;
+    cout << "Hash table size: " << tableSize << endl;
+    cout << "Best case time: " << bestTime << " seconds" << endl;
+    cout << "Average case time: " << averageTime << " seconds" << endl;
+    cout << "Worst case time: " << worstTime << " seconds" << endl;
+    cout << "\nOutput saved to " << outputFile << endl;
+
+    return 0;
+}
