@@ -1,0 +1,4 @@
+Dataset size: 7
+Best case time: 0 seconds
+Average case time: 0 seconds
+Worst case time: 0 seconds
