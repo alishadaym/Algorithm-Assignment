@@ -1,5 +1,5 @@
-Dataset size: 1000
-Hash table size: 2001
+Dataset size: 100
+Hash table size: 201
 
 Best case time: 0.000 microseconds
 Average case time: 0.000 microseconds
