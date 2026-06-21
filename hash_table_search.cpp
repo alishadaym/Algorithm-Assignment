@@ -10,10 +10,10 @@
 // Member_4: 242UC244S4 | NUR ALISHA DAMIA BINTI SHAMSUL ANUAR (leader) | nur.alisha.damia@student.mmu.edu.my | 0166647156
 // *********************************************************
 // Task Distribution
-// Member_1:
-// Member_2: Hash table search & Hash table search step
-// Member_3:
-// Member_4:
+// Member_1: Dataset Generator, Heap Sort & Heap Sort Step
+// Member_2: Hash Table Search & Hash Table Search Step
+// Member_3: Radix Sort & Radix Sort Step
+// Member_4: Documentation
 // *********************************************************
 
 #include <iostream>

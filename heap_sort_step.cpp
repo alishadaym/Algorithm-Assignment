@@ -10,9 +10,9 @@
 // Member_4: 243UC247BP | ILIE ISABELLA BINTI FAIROZ IZNI | ilie.isabella.fairoz@student.mmu.edu.my | 0186656781
 // *********************************************************
 // Task Distribution
-// Member_1: Dataset Generator & Heap Sort
-// Member_2: Hash Table Search
-// Member_3: Radix Sort
+// Member_1: Dataset Generator, Heap Sort & Heap Sort Step
+// Member_2: Hash Table Search & Hash Table Search Step
+// Member_3: Radix Sort & Radix Sort Step
 // Member_4: Documentation
 // *********************************************************
 
