@@ -86,16 +86,20 @@ bool searchRecord (vector<Record>& table, long long target)
 
 double measureSearchTime (vector<Record>& table, vector<long long>& targets)
 {
+    volatile int foundCount = 0; //prevent compiler optimization for search results
     auto start = chrono::high_resolution_clock::now();
 
     for (long long target : targets)
     {
-        searchRecord(table, target);
+        if (searchRecord(table, target));
+        {
+            foundCount++;
+        }
     }
 
     auto end = chrono::high_resolution_clock::now();
 
-    chrono::duration<double> elapsed = end - start;
+    chrono::duration<double, micro> elapsed = end - start;
     return elapsed.count();
 }
 
@@ -180,24 +184,26 @@ int main()
     string outputFile = "hash_table_search_dataset_" + to_string(n) + ".txt";
     ofstream out(outputFile);
 
-    out << fixed << setprecision(9);
+    out << fixed << setprecision(3);
 
     out << "Dataset size: " << n << endl;
     out << "Hash table size: " << tableSize << endl;
-    out << "Best case time: " << bestTime << " seconds" << endl;
-    out << "Average case time: " << averageTime << " seconds" << endl;
-    out << "Worst case time: " << worstTime << " seconds" << endl;
+    out << endl;
+    out << "Best case time: " << bestTime << " microseconds" << endl;
+    out << "Average case time: " << averageTime << " microseconds" << endl;
+    out << "Worst case time: " << worstTime << " microseconds" << endl;
 
     out.close();
 
-    cout << fixed << setprecision(9);
+    cout << fixed << setprecision(3);
 
     cout << "\nHash Table Search Runtime Result" << endl;
     cout << "Dataset size: " << n << endl;
     cout << "Hash table size: " << tableSize << endl;
-    cout << "Best case time: " << bestTime << " seconds" << endl;
-    cout << "Average case time: " << averageTime << " seconds" << endl;
-    cout << "Worst case time: " << worstTime << " seconds" << endl;
+    cout << endl;
+    cout << "Best case time: " << bestTime << " microseconds" << endl;
+    cout << "Average case time: " << averageTime << " microseconds" << endl;
+    cout << "Worst case time: " << worstTime << " microseconds" << endl;
     cout << "\nOutput saved to " << outputFile << endl;
 
     return 0;
