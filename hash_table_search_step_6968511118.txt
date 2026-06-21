@@ -1,0 +1,34 @@
+Target: 6968511118
+Hash index: 59
+Search path: 
+Probe 1
+Index: 59
+Compare: 5506079192 != 6968511118
+Key not matched. Continue linear probing...
+Linear probing: Index 59 -> Index 60
+
+Probe 2
+Index: 60
+Compare: 4853027131 != 6968511118
+Key not matched. Continue linear probing...
+Linear probing: Index 60 -> Index 61
+
+Probe 3
+Index: 61
+Compare: 2091141431 != 6968511118
+Key not matched. Continue linear probing...
+Linear probing: Index 61 -> Index 62
+
+Probe 4
+Index: 62
+Compare: 2030120565 != 6968511118
+Key not matched. Continue linear probing...
+Linear probing: Index 62 -> Index 63
+
+Probe 5
+Index: 63
+Compare: 6968511118 == 6968511118
+
+Target found
+Record: 6968511118/gpstg
+Total Probes: 5
