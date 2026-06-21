@@ -136,7 +136,7 @@ int main()
     file.close();
 
     int n = data.size();
-    int tableSize = n * 2 + 1; //using prime number greater than 2n for better distribution
+    int tableSize = n + 1; //table size have at least one empty slot to avoid infinite loop in linear probing
 
     vector<Record> hashTable(tableSize);
 
@@ -149,10 +149,13 @@ int main()
     vector<long long> averageTargets;
     vector<long long> worstTargets;
 
-    //Best case: repeatedly search first existing keys (key should be found immediately)
+    //Best case: search first 10% existing keys (should be found immediately/fewer probes)
+    int tenPercent = n / 10;
+    if (tenPercent < 1) tenPercent = 1; //ensure at least one key is searched in best case
+    
     for (int i = 0; i < n; i++)
     {
-        bestTargets.push_back(data[0].first);
+        bestTargets.push_back(data[i % tenPercent].first);
     }
 
     //Average case: search all existing keys once (keys should be found after some probing)
@@ -161,20 +164,12 @@ int main()
         averageTargets.push_back(data[i].first);
     }
 
-    //Worst case: search non-existing keys that hash to the same index as the first record 
-    //(forcing collision probing)
-    int worstIndex = data[0].first % tableSize;
-    long long worstKey = data[0].first + tableSize;
-
+    //Worst case: search last 10% existing keys (should be found after maximum probing)
+    //keys are more likely to have been affected by collisions
     for (int i = 0; i < n; i++)
     {
-        while (worstKey % tableSize != worstIndex)
-        {
-            worstKey++;
-        }
-
-        worstTargets.push_back(worstKey);
-        worstKey += tableSize;
+        int index = n - 1 - (i % tenPercent);
+        worstTargets.push_back(data[index].first);
     }
 
     double bestTime = measureSearchTime(hashTable, bestTargets);
