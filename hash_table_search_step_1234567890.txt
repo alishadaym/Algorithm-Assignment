@@ -1,10 +1,18 @@
 Target: 1234567890
-Hash index: 0
+Hash index: 915
 Search path: 
-Index 0: 1000000155 != 1234567890
-Index 1: 1000000065 != 1234567890
-Index 2: 1000000037 != 1234567890
-Index 3: 1000000038 != 1234567890
-Index 4: 1000000009 != 1234567890
--1 != 1234567890
+Probe 1
+Index: 915
+Compare: 2424628621 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 915 -> Index 916
+
+Probe 2
+Index: 916
+Compare: 5253574390 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 916 -> Index 917
+
+Empty slot reached. No matching key exists.
 Target not found.
+Total Probes: 3

@@ -1,0 +1,5 @@
+Dataset size: 1000
+Hash table size: 2001
+Best case time: 0.000000000 seconds
+Average case time: 0.000000000 seconds
+Worst case time: 0.000000000 seconds

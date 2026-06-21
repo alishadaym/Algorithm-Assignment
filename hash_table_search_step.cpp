@@ -62,6 +62,7 @@ void searchStep(vector<Record>& table, long long target)
     int tableSize = table.size();
     int index = hashFunction(target, tableSize);
     int startIndex = index; // to detect if already looped through the entire table
+    int probe = 1;
 
     string filename = "hash_table_search_step_" + to_string(target) + ".txt";
     ofstream out(filename);
@@ -72,33 +73,50 @@ void searchStep(vector<Record>& table, long long target)
 
     while (table[index].occupied)
     {
-        out << "Index " << index << ": ";
+        out << "Probe " << probe << endl;
+        out << "Index: " << index << endl;
+        out << "Compare: ";
 
         if (table[index].key == target)
         {
-            out << table[index].key << " = " << table[index].key << "/" << table[index].value << endl;
-            cout << "Target found. Output saved to " << filename << endl;
-            
+            out << table[index].key << " == " << target << endl;
+            out << endl;
+            out << "Target found" << endl;
+            out << "Record: " << table[index].key << "/" << table[index].value << endl;
+
+            out << "Total Probes: " << probe << endl;
+
+            cout << "Target found." << endl;
+            cout << "Search step saved to " << filename << endl;
+
             out.close();
             return;
         }
-        else
-        {
-            out << table[index].key << " != " << target << endl;
-        }
 
-        index = (index + 1) % tableSize; // linear probing
+        out << table[index].key << " != " << target << endl;
+        
+        int previousIndex = index;
+        index = (index + 1) % tableSize;
+
+        out << "Key not matched. Continue linear probing..." << endl;
+        out << "Linear probing: Index " << previousIndex << " -> Index " << index << endl;
+        out << endl;
+
+        probe++;
 
         if (index == startIndex)
         {
-            break; // already looped through the entire table
+            break; // looped through the entire table
         }
     }
 
-    out << "-1 != " << target << endl;
+    out << "Empty slot reached. No matching key exists." << endl;
     out << "Target not found." << endl;
+    out << "Total Probes: " << probe << endl;
 
-    cout << "Target not found. Output saved to " << filename << endl;
+    cout << "Target not found." << endl;
+    cout << "Search step saved to " << filename << endl;
+
     out.close();
 }
 
