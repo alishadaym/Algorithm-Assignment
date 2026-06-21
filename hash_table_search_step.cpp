@@ -153,7 +153,7 @@ int main()
 
     file.close();
 
-    int tableSize = data.size() * 2 + 1;
+    int tableSize = data.size() + 1; //1 empty slot to avoid full table
     vector<Record> hashTable(tableSize);
 
     for (auto& item : data)
