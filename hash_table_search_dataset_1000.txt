@@ -1,9 +1,9 @@
 Dataset size: 1000
 Hash table size: 1001
 
-Best case time: 18.800 microseconds
-Average case time: 261.100 microseconds
-Worst case time: 1961.400 microseconds
+Best case time: 20.000 microseconds
+Average case time: 359.900 microseconds
+Worst case time: 2364.700 microseconds
 
 Dataset Verification Result
 Current dataset: dataset_1000.csv

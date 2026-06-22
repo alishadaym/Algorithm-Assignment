@@ -1,6 +1,11 @@
 Dataset size: 100
 Hash table size: 101
 
-Best case time: 2.200 microseconds
-Average case time: 6.900 microseconds
-Worst case time: 23.000 microseconds
+Best case time: 2.800 microseconds
+Average case time: 8.900 microseconds
+Worst case time: 30.200 microseconds
+
+Dataset Verification Result
+Current dataset: dataset_100.csv
+Previous dataset: None
+Verification skipped for the smallest dataset.
