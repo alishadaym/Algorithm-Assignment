@@ -1,11 +1,114 @@
 Dataset size: 1000
 Hash table size: 1001
 
-Best case time: 0.000 microseconds
-Average case time: 0.000 microseconds
-Worst case time: 0.000 microseconds
+Best case time: 18.800 microseconds
+Average case time: 261.100 microseconds
+Worst case time: 1961.400 microseconds
 
 Dataset Verification Result
 Current dataset: dataset_1000.csv
 Previous dataset: dataset_100.csv
 Previous dataset exists in current dataset: YES
+
+Verification Details
+----------------------------------------
+6903206425,pdsnr -> yes
+4562279217,sdbjy -> yes
+2116508587,pfieq -> yes
+4132097685,rlkxv -> yes
+8654739389,iaufk -> yes
+8834710940,gcttu -> yes
+5445472264,wgpnc -> yes
+8403030806,lpwwa -> yes
+6000912825,pbzif -> yes
+2635433667,vlyyv -> yes
+3385192669,cpyfs -> yes
+8224048537,uaqcn -> yes
+7824723794,nmied -> yes
+1313699743,htufh -> yes
+5406530988,qmron -> yes
+7102720118,hfcln -> yes
+9040200196,dlicf -> yes
+9312242615,boosa -> yes
+9757486692,fzuhb -> yes
+2867189831,nvton -> yes
+3311201102,yjpva -> yes
+8250617004,ktkte -> yes
+9601052864,rzccd -> yes
+5855276584,kiaty -> yes
+8294869128,odlre -> yes
+6918084835,lntbl -> yes
+2501447595,jjhfr -> yes
+5506079192,sqxqg -> yes
+9766833105,kvdzd -> yes
+4051039653,oxlwx -> yes
+8145260752,sjrvr -> yes
+8082041861,hlrjf -> yes
+2531170662,jolsk -> yes
+5748275762,mgjtw -> yes
+3681790276,lzvfa -> yes
+1811561317,ubiri -> yes
+7698701517,hgqbg -> yes
+4141464883,otziz -> yes
+8637700494,ntufd -> yes
+7411948737,znvkh -> yes
+8543955334,ttbmr -> yes
+9685906552,czmxi -> yes
+1091283810,nygsp -> yes
+7664263595,tpgbk -> yes
+7191679847,wgzgk -> yes
+3472001417,lexgi -> yes
+5278790660,pbddg -> yes
+9745870506,gvkwl -> yes
+4853027131,tprju -> yes
+1896351253,frgeu -> yes
+2091141431,zfwam -> yes
+7469422597,ktfkj -> yes
+4262235761,hhcob -> yes
+8562099904,omhhz -> yes
+7855311308,fewbe -> yes
+1167735542,uusif -> yes
+5586950874,pdbal -> yes
+1941448558,yxhyt -> yes
+2030120565,yhuxw -> yes
+5625651928,bcnos -> yes
+7183236262,jsmnc -> yes
+2040217507,dfbsl -> yes
+8425729982,gbxil -> yes
+3620642462,uoaqw -> yes
+5777432600,jmadj -> yes
+3558262259,mldyg -> yes
+4387501828,xovdz -> yes
+6548401297,glcei -> yes
+6417426832,qhjxk -> yes
+2777576365,dsreo -> yes
+2575609728,xkkqf -> yes
+7713869158,hymxz -> yes
+1874497164,klolk -> yes
+4857163106,wemfa -> yes
+8169850156,xuuqe -> yes
+7680301085,twdkr -> yes
+9522935316,omefz -> yes
+4635003055,lqgtk -> yes
+1573184156,xvcdp -> yes
+1521537636,tjutk -> yes
+6968511118,gpstg -> yes
+2198505254,kthfg -> yes
+6282485297,mzlmx -> yes
+3931084271,npiws -> yes
+6012772689,aqbln -> yes
+4602214411,fkkrv -> yes
+3960902626,ofiyv -> yes
+9073450848,dohha -> yes
+8329841603,qcscd -> yes
+6941835376,rvnhc -> yes
+5787949209,dckbm -> yes
+6469855738,zkkbd -> yes
+2064107649,rymfd -> yes
+1792171174,qtpkb -> yes
+7705911091,jljvt -> yes
+9907210279,cvxfq -> yes
+2579951887,fzxvf -> yes
+1330889608,daasy -> yes
+2839174716,oadad -> yes
+4662353908,njeyk -> yes

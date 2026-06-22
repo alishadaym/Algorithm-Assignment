@@ -159,6 +159,52 @@ bool verifyPreviousExistsInCurrent(string previousFile, string currentFile)
     return true;
 }
 
+void printVerificationDetails(string previousFile, string currentFile, ostream& out)
+{
+    ifstream previous(previousFile);
+    ifstream current(currentFile);
+
+    if (!previous.is_open() || !current.is_open())
+    {
+        out << "Unable to open verification files." << endl;
+        return;
+    }
+
+    unordered_set<string> currentRecords;
+    string line;
+
+    //to store all records from current dataset
+    while (getline(current, line))
+    {
+        if (!line.empty())
+        {
+            currentRecords.insert(line);
+        }
+    }
+
+    out << "\nVerification Details" << endl;
+    out << "----------------------------------------" << endl;
+
+    while (getline(previous, line))
+    {
+        if (!line.empty())
+        {
+            out << line << " -> ";
+            
+            if (currentRecords.find(line) != currentRecords.end())
+            {
+                out << "yes";
+            }
+            else
+            {
+                out << "no";
+            }
+
+            out << endl;
+        }
+    }
+}
+
 int main()
 {
     string datasetFile;
@@ -271,6 +317,8 @@ int main()
             out << "YES" << endl;
         else
             out << "NO" << endl;
+
+        printVerificationDetails(previousFile, datasetFile, out);
     }
 
     out.close();
@@ -304,6 +352,8 @@ int main()
             cout << "YES" << endl;
         else
             cout << "NO" << endl;
+
+        printVerificationDetails(previousFile, datasetFile, cout);
     }
 
     cout << "\nOutput saved to " << outputFile << endl;
