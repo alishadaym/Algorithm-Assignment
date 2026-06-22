@@ -161,7 +161,7 @@ int main()
 
     // write running time in file
     output << endl
-           << "Running time: " << time.count() << "seconds.";
+           << fixed << setprecision(6) << "Running time: " << time.count() << "seconds.";
 
     output.close();
 
