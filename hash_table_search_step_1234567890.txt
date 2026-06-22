@@ -1,18 +1,300 @@
 Target: 1234567890
-Hash index: 915
+Hash index: 46
 Search path: 
 Probe 1
-Index: 915
-Compare: 2424628621 != 1234567890
+Index: 46
+Compare: 6918084835 != 1234567890
 Key not matched. Continue linear probing...
-Linear probing: Index 915 -> Index 916
+Linear probing: Index 46 -> Index 47
 
 Probe 2
-Index: 916
-Compare: 5253574390 != 1234567890
+Index: 47
+Compare: 6903206425 != 1234567890
 Key not matched. Continue linear probing...
-Linear probing: Index 916 -> Index 917
+Linear probing: Index 47 -> Index 48
+
+Probe 3
+Index: 48
+Compare: 6000912825 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 48 -> Index 49
+
+Probe 4
+Index: 49
+Compare: 5855276584 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 49 -> Index 50
+
+Probe 5
+Index: 50
+Compare: 4051039653 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 50 -> Index 51
+
+Probe 6
+Index: 51
+Compare: 7698701517 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 51 -> Index 52
+
+Probe 7
+Index: 52
+Compare: 7855311308 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 52 -> Index 53
+
+Probe 8
+Index: 53
+Compare: 6417426832 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 53 -> Index 54
+
+Probe 9
+Index: 54
+Compare: 8169850156 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 54 -> Index 55
+
+Probe 10
+Index: 55
+Compare: 8834710940 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 55 -> Index 56
+
+Probe 11
+Index: 56
+Compare: 3931084271 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 56 -> Index 57
+
+Probe 12
+Index: 57
+Compare: 2116508587 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 57 -> Index 58
+
+Probe 13
+Index: 58
+Compare: 7102720118 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 58 -> Index 59
+
+Probe 14
+Index: 59
+Compare: 5506079192 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 59 -> Index 60
+
+Probe 15
+Index: 60
+Compare: 4853027131 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 60 -> Index 61
+
+Probe 16
+Index: 61
+Compare: 2091141431 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 61 -> Index 62
+
+Probe 17
+Index: 62
+Compare: 2030120565 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 62 -> Index 63
+
+Probe 18
+Index: 63
+Compare: 6968511118 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 63 -> Index 64
+
+Probe 19
+Index: 64
+Compare: 9040200196 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 64 -> Index 65
+
+Probe 20
+Index: 65
+Compare: 2635433667 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 65 -> Index 66
+
+Probe 21
+Index: 66
+Compare: 3472001417 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 66 -> Index 67
+
+Probe 22
+Index: 67
+Compare: 2531170662 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 67 -> Index 68
+
+Probe 23
+Index: 68
+Compare: 1811561317 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 68 -> Index 69
+
+Probe 24
+Index: 69
+Compare: 3960902626 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 69 -> Index 70
+
+Probe 25
+Index: 70
+Compare: 6941835376 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 70 -> Index 71
+
+Probe 26
+Index: 71
+Compare: 6469855738 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 71 -> Index 72
+
+Probe 27
+Index: 72
+Compare: 2064107649 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 72 -> Index 73
+
+Probe 28
+Index: 73
+Compare: 6282485297 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 73 -> Index 74
+
+Probe 29
+Index: 74
+Compare: 1792171174 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 74 -> Index 75
+
+Probe 30
+Index: 75
+Compare: 7705911091 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 75 -> Index 76
+
+Probe 31
+Index: 76
+Compare: 1573184156 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 76 -> Index 77
+
+Probe 32
+Index: 77
+Compare: 2198505254 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 77 -> Index 78
+
+Probe 33
+Index: 78
+Compare: 2579951887 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 78 -> Index 79
+
+Probe 34
+Index: 79
+Compare: 5406530988 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 79 -> Index 80
+
+Probe 35
+Index: 80
+Compare: 2839174716 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 80 -> Index 81
+
+Probe 36
+Index: 81
+Compare: 4141464883 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 81 -> Index 82
+
+Probe 37
+Index: 82
+Compare: 8403030806 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 82 -> Index 83
+
+Probe 38
+Index: 83
+Compare: 7824723794 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 83 -> Index 84
+
+Probe 39
+Index: 84
+Compare: 4857163106 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 84 -> Index 85
+
+Probe 40
+Index: 85
+Compare: 5787949209 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 85 -> Index 86
+
+Probe 41
+Index: 86
+Compare: 1330889608 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 86 -> Index 87
+
+Probe 42
+Index: 87
+Compare: 1874497164 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 87 -> Index 88
+
+Probe 43
+Index: 88
+Compare: 2501447595 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 88 -> Index 89
+
+Probe 44
+Index: 89
+Compare: 9766833105 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 89 -> Index 90
+
+Probe 45
+Index: 90
+Compare: 9685906552 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 90 -> Index 91
+
+Probe 46
+Index: 91
+Compare: 6012772689 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 91 -> Index 92
+
+Probe 47
+Index: 92
+Compare: 9907210279 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 92 -> Index 93
+
+Probe 48
+Index: 93
+Compare: 4662353908 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 93 -> Index 94
+
+Probe 49
+Index: 94
+Compare: 9312242615 != 1234567890
+Key not matched. Continue linear probing...
+Linear probing: Index 94 -> Index 95
 
 Empty slot reached. No matching key exists.
 Target not found.
-Total Probes: 3
+Total Probes: 50
