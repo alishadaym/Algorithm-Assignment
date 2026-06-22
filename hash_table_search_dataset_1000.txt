@@ -3,9 +3,9 @@ Hash table size: 1001
 
 Best case time: 0.000 microseconds
 Average case time: 0.000 microseconds
-Worst case time: 3057.000 microseconds
+Worst case time: 0.000 microseconds
 
 Dataset Verification Result
 Current dataset: dataset_1000.csv
 Previous dataset: dataset_100.csv
-First ten percent of current dataset exists in previous dataset: NO
+Previous dataset exists in current dataset: YES

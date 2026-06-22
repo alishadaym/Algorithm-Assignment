@@ -104,66 +104,59 @@ double measureSearchTime (vector<Record>& table, vector<long long>& targets)
     return elapsed.count();
 }
 
-bool verifyFirstTenPercent(string currentFile, string previousFile)
-{
-    ifstream current(currentFile);
-    ifstream previous(previousFile);
-
-    if (!current.is_open() || !previous.is_open())
-        return false;
-
-    vector<string> currentRecords;
-    unordered_set<string> previousRecords;
-
-    string line;
-
-    //read current dataset
-    while (getline(current, line))
-    {
-        if (!line.empty())
-            currentRecords.push_back(line);
-    }
-
-    //read previous dataset
-    while (getline(previous, line))
-    {
-        if (!line.empty())
-            previousRecords.insert(line);
-    }
-
-    current.close();
-    previous.close();
-
-    int tenPercent = currentRecords.size() / 10;
-
-    if (tenPercent == 0)
-        tenPercent = 1;
-
-    for (int i = 0; i < tenPercent; i++)
-    {
-        if (previousRecords.find(currentRecords[i]) == previousRecords.end())
-            return false;
-    }
-
-    return true;
-}
-
-//get previous dataset file
 string getPreviousDatasetFile(string currentFile)
 {
     if (currentFile == "dataset_100.csv")
         return "none";
-    
+
     if (currentFile == "dataset_1000.csv")
         return "dataset_100.csv";
-    
+
     if (currentFile == "dataset_10000.csv")
         return "dataset_1000.csv";
-    
+
     if (currentFile == "dataset_100000.csv")
         return "dataset_10000.csv";
 
+    if (currentFile == "dataset_1000000.csv")
+        return "dataset_100000.csv";
+
     return "none";
+}
+
+bool verifyPreviousExistsInCurrent(string previousFile, string currentFile)
+{
+    ifstream previous(previousFile);
+    ifstream current(currentFile);
+
+    if (!previous.is_open() || !current.is_open())
+    {
+        return false;
+    }
+
+    unordered_set<string> currentRecords;
+    string line;
+
+    while (getline(current, line))
+    {
+        if (!line.empty())
+        {
+            currentRecords.insert(line);
+        }
+    }
+
+    while (getline(previous, line))
+    {
+        if (!line.empty())
+        {
+            if (currentRecords.find(line) == currentRecords.end())
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
 }
 
 int main()
@@ -240,10 +233,16 @@ int main()
     double worstTime = measureSearchTime(hashTable, worstTargets);
 
     string outputFile = "hash_table_search_dataset_" + to_string(n) + ".txt";
-    ofstream out(outputFile);
+
     string previousFile = getPreviousDatasetFile(datasetFile);
     bool verified = false;
 
+    if (previousFile != "none")
+    {
+        verified = verifyPreviousExistsInCurrent(previousFile, datasetFile);
+    }
+
+    ofstream out(outputFile);
     out << fixed << setprecision(3);
 
     out << "Dataset size: " << n << endl;
@@ -254,7 +253,8 @@ int main()
     out << "Worst case time: " << worstTime << " microseconds" << endl;
 
     //10% verification
-    out << "\nDataset Verification Result" << endl;
+    out << endl;
+    out << "Dataset Verification Result" << endl;
     out << "Current dataset: " << datasetFile << endl;
 
     if (previousFile == "none")
@@ -265,7 +265,7 @@ int main()
     else
     {
         out << "Previous dataset: " << previousFile << endl;
-        out << "First ten percent of current dataset exists in previous dataset: ";
+        out << "Previous dataset exists in current dataset: ";
 
         if (verified)
             out << "YES" << endl;
@@ -298,13 +298,15 @@ int main()
     else
     {
         cout << "Previous dataset: " << previousFile << endl;
-        cout << "First ten percent of current dataset exists in previous dataset: ";
+        cout << "Previous dataset exists in current dataset: ";
 
         if (verified)
             cout << "YES" << endl;
         else
             cout << "NO" << endl;
     }
+
+    cout << "\nOutput saved to " << outputFile << endl;
 
     return 0;
 }

@@ -1,0 +1,11 @@
+Dataset size: 10000
+Hash table size: 10001
+
+Best case time: 0.000 microseconds
+Average case time: 2145.100 microseconds
+Worst case time: 47349.500 microseconds
+
+Dataset Verification Result
+Current dataset: dataset_10000.csv
+Previous dataset: dataset_1000.csv
+Previous dataset exists in current dataset: YES
