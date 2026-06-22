@@ -106,22 +106,20 @@ double measureSearchTime (vector<Record>& table, vector<long long>& targets)
 
 string getPreviousDatasetFile(string currentFile)
 {
-    if (currentFile == "dataset_100.csv")
+    // Extract the number from "dataset_xxxxx.csv"
+    int start = currentFile.find("_") + 1;
+    int end = currentFile.find(".csv");
+
+    string numberStr = currentFile.substr(start, end - start);
+    int currentSize = stoi(numberStr);
+
+    // Smallest dataset
+    if (currentSize <= 100)
         return "none";
 
-    if (currentFile == "dataset_1000.csv")
-        return "dataset_100.csv";
+    int previousSize = currentSize / 10;
 
-    if (currentFile == "dataset_10000.csv")
-        return "dataset_1000.csv";
-
-    if (currentFile == "dataset_100000.csv")
-        return "dataset_10000.csv";
-
-    if (currentFile == "dataset_1000000.csv")
-        return "dataset_100000.csv";
-
-    return "none";
+    return "dataset_" + to_string(previousSize) + ".csv";
 }
 
 bool verifyPreviousExistsInCurrent(string previousFile, string currentFile)
