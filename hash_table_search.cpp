@@ -23,6 +23,7 @@
 #include <sstream>
 #include <chrono>
 #include <iomanip>
+#include <unordered_set>
 
 using namespace std;
 
@@ -91,7 +92,7 @@ double measureSearchTime (vector<Record>& table, vector<long long>& targets)
 
     for (long long target : targets)
     {
-        if (searchRecord(table, target));
+        if (searchRecord(table, target))
         {
             foundCount++;
         }
@@ -101,6 +102,68 @@ double measureSearchTime (vector<Record>& table, vector<long long>& targets)
 
     chrono::duration<double, micro> elapsed = end - start;
     return elapsed.count();
+}
+
+bool verifyFirstTenPercent(string currentFile, string previousFile)
+{
+    ifstream current(currentFile);
+    ifstream previous(previousFile);
+
+    if (!current.is_open() || !previous.is_open())
+        return false;
+
+    vector<string> currentRecords;
+    unordered_set<string> previousRecords;
+
+    string line;
+
+    //read current dataset
+    while (getline(current, line))
+    {
+        if (!line.empty())
+            currentRecords.push_back(line);
+    }
+
+    //read previous dataset
+    while (getline(previous, line))
+    {
+        if (!line.empty())
+            previousRecords.insert(line);
+    }
+
+    current.close();
+    previous.close();
+
+    int tenPercent = currentRecords.size() / 10;
+
+    if (tenPercent == 0)
+        tenPercent = 1;
+
+    for (int i = 0; i < tenPercent; i++)
+    {
+        if (previousRecords.find(currentRecords[i]) == previousRecords.end())
+            return false;
+    }
+
+    return true;
+}
+
+//get previous dataset file
+string getPreviousDatasetFile(string currentFile)
+{
+    if (currentFile == "dataset_100.csv")
+        return "none";
+    
+    if (currentFile == "dataset_1000.csv")
+        return "dataset_100.csv";
+    
+    if (currentFile == "dataset_10000.csv")
+        return "dataset_1000.csv";
+    
+    if (currentFile == "dataset_100000.csv")
+        return "dataset_10000.csv";
+
+    return "none";
 }
 
 int main()
@@ -178,6 +241,8 @@ int main()
 
     string outputFile = "hash_table_search_dataset_" + to_string(n) + ".txt";
     ofstream out(outputFile);
+    string previousFile = getPreviousDatasetFile(datasetFile);
+    bool verified = false;
 
     out << fixed << setprecision(3);
 
@@ -187,6 +252,26 @@ int main()
     out << "Best case time: " << bestTime << " microseconds" << endl;
     out << "Average case time: " << averageTime << " microseconds" << endl;
     out << "Worst case time: " << worstTime << " microseconds" << endl;
+
+    //10% verification
+    out << "\nDataset Verification Result" << endl;
+    out << "Current dataset: " << datasetFile << endl;
+
+    if (previousFile == "none")
+    {
+        out << "Previous dataset: None" << endl;
+        out << "Verification skipped for the smallest dataset." << endl;
+    }
+    else
+    {
+        out << "Previous dataset: " << previousFile << endl;
+        out << "First ten percent of current dataset exists in previous dataset: ";
+
+        if (verified)
+            out << "YES" << endl;
+        else
+            out << "NO" << endl;
+    }
 
     out.close();
 
@@ -200,6 +285,26 @@ int main()
     cout << "Average case time: " << averageTime << " microseconds" << endl;
     cout << "Worst case time: " << worstTime << " microseconds" << endl;
     cout << "\nOutput saved to " << outputFile << endl;
+
+    //10% verification
+    cout << "\nDataset Verification Result" << endl;
+    cout << "Current dataset: " << datasetFile << endl;
+
+    if (previousFile == "none")
+    {
+        cout << "Previous dataset: None" << endl;
+        cout << "Verification skipped for the smallest dataset." << endl;
+    }
+    else
+    {
+        cout << "Previous dataset: " << previousFile << endl;
+        cout << "First ten percent of current dataset exists in previous dataset: ";
+
+        if (verified)
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
+    }
 
     return 0;
 }
