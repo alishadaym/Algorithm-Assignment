@@ -1,4 +1,0 @@
-Target: 1000000038
-Hash index: 3
-Search path: 
-Index 3: 1000000038 = 1000000038/uoren
